@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+
+<nav th:replace="~{layout :: nav}"></nav>
+
+<div class="container py-4">
+    <h1 th:text="${review.id == null ? 'Nueva Review' : 'Editar Review'}"></h1>
+
+    <form th:action="@{/reviews}" th:object="${review}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label>Cliente</label>
+            <select class="form-control" th:field="*{cliente}">
+                <option th:each="c : ${clientes}"
+                        th:value="${c.id}"
+                        th:text="${c.nombre}">
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label>Puntuación</label>
+            <select class="form-control" th:field="*{puntuacion}">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label>Comentario</label>
+            <textarea class="form-control" th:field="*{comentario}"></textarea>
+        </div>
+
+        <button class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+
+<footer th:replace="~{layout :: footer}"></footer>
+
+</body>
+</html>

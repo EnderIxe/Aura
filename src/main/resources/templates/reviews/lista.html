@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Se importa el fragmento <head> desde layout.html -->
+<head th:replace="layout :: head"></head>
+
+<body>
+
+<!-- Se importa la barra de navegación -->
+<nav th:replace="layout :: nav"></nav>
+
+<div class="container py-4">
+
+    <!-- Título de la página -->
+    <h1>Listado de Reviews</h1>
+
+    <!-- Botón para ir al formulario de creación de una nueva review -->
+    <a class="btn btn-success mb-3" href="/reviews/nuevo">Nueva Review</a>
+
+    <!-- Tabla con estilo Bootstrap para mostrar las reviews -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Puntuación</th>
+                <th>Comentario</th>
+                <th></th> <!-- Columna para botones de acción -->
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- Bucle que recorre la lista de reviews enviada desde el controlador -->
+            <tr th:each="r : ${reviews}">
+
+                <!-- Muestra el nombre del cliente asociado a la review -->
+                <!-- Gracias a la relación ManyToOne, se accede como r.cliente.nombre -->
+                <td th:text="${r.cliente.nombre}"></td>
+
+                <!-- Muestra la puntuación de la review -->
+                <td th:text="${r.puntuacion}"></td>
+
+                <!-- Muestra el comentario escrito por el cliente -->
+                <td th:text="${r.comentario}"></td>
+
+                <td>
+                    <!-- Botón para editar la review seleccionada -->
+                    <a class="btn btn-warning btn-sm"
+                       th:href="@{'/reviews/editar/' + ${r.id}}">
+                       Editar
+                    </a>
+
+                    <!-- Botón para eliminar la review seleccionada -->
+                    <a class="btn btn-danger btn-sm"
+                       th:href="@{'/reviews/eliminar/' + ${r.id}}">
+                       Eliminar
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Se importa el footer -->
+<footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>

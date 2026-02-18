@@ -1,0 +1,96 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+
+<nav th:replace="~{layout :: nav}"></nav>
+
+<div class="container py-4">
+    <h1>Informe</h1>
+
+    <h3>Clientes por género</h3>
+    <canvas id="chartGenero"></canvas>
+
+    <h3 class="mt-4">Reviews por nº de estrellas</h3>
+    <canvas id="chartEstrellas"></canvas>
+
+    <h3 class="mt-4">Clientes por franjas de edad</h3>
+    <canvas id="chartEdades"></canvas>
+
+    <h3 class="mt-4">Gráfico libre (ej: intolerancia)</h3>
+    <canvas id="chartIntolerancia"></canvas>
+</div>
+
+<footer th:replace="~{layout :: footer}"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script th:inline="javascript">
+    const hombres = [[${hombres}]];
+    const mujeres = [[${mujeres}]];
+    const otros   = [[${otros}]];
+
+    new Chart(document.getElementById('chartGenero'), {
+        type: 'bar',
+        data: {
+            labels: ['Hombre', 'Mujer', 'Otro'],
+            datasets: [{
+                label: 'Clientes',
+                data: [hombres, mujeres, otros],
+                backgroundColor: ['#0d6efd', '#dc3545', '#6c757d']
+            }]
+        }
+    });
+
+    const e1 = [[${e1}]];
+    const e2 = [[${e2}]];
+    const e3 = [[${e3}]];
+    const e4 = [[${e4}]];
+    const e5 = [[${e5}]];
+
+    new Chart(document.getElementById('chartEstrellas'), {
+        type: 'bar',
+        data: {
+            labels: ['1', '2', '3', '4', '5'],
+            datasets: [{
+                label: 'Reviews',
+                data: [e1, e2, e3, e4, e5],
+                backgroundColor: '#ffc107'
+            }]
+        }
+    });
+
+    const f0_15   = [[${f0_15}]];
+    const f16_24  = [[${f16_24}]];
+    const f25_35  = [[${f25_35}]];
+    const f36_50  = [[${f36_50}]];
+    const f51plus = [[${f51plus}]];
+
+    new Chart(document.getElementById('chartEdades'), {
+        type: 'bar',
+        data: {
+            labels: ['0-15', '16-24', '25-35', '36-50', '51+'],
+            datasets: [{
+                label: 'Clientes',
+                data: [f0_15, f16_24, f25_35, f36_50, f51plus],
+                backgroundColor: '#20c997'
+            }]
+        }
+    });
+
+    const conIntolerancia  = [[${conIntolerancia}]];
+    const sinIntolerancia  = [[${sinIntolerancia}]];
+
+    new Chart(document.getElementById('chartIntolerancia'), {
+        type: 'pie',
+        data: {
+            labels: ['Con intolerancia', 'Sin intolerancia'],
+            datasets: [{
+                data: [conIntolerancia, sinIntolerancia],
+                backgroundColor: ['#fd7e14', '#198754']
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Fragmento HEAD: se reutiliza en todas las páginas -->
+<head th:fragment="head">
+    <meta charset="UTF-8">
+
+    <!-- Título dinámico: si no se pasa 'titulo', usa "Clientes Reviews" -->
+    <title th:text="${titulo}">Clientes Reviews</title>
+
+    <!-- Bootstrap 5 desde CDN para estilos y componentes -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Fragmento NAV: barra de navegación superior -->
+    <nav th:fragment="nav" class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+        <div class="container">
+
+            <!-- Enlaces principales del menú -->
+            <a class="navbar-brand" href="/clientes">Clientes</a>
+            <a class="btn btn-outline-primary" href="/reviews">Reviews</a>
+            <a class="btn btn-outline-secondary" href="/informe">Informe</a>
+
+        </div>
+    </nav>
+
+    <!-- Fragmento FOOTER: pie de página reutilizable -->
+    <footer th:fragment="footer" class="text-center mt-4 py-3 border-top">
+        <small>Proyecto Clientes & Reviews</small>
+    </footer>
+
+</body>
+</html>
