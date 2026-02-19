@@ -1,0 +1,28 @@
+name: CD 3 - Release Oficial
+
+# SUPUESTO 3: Reacciona solo a etiquetas que empiezan por 'v'
+on:
+  push:
+    tags:
+      - 'v*' 
+
+jobs:
+  crear-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Obligatorio para que GitHub te deje crear la Release
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+
+      - name: Compilar paquete
+        run: mvn -B package -DskipTests
+
+      # SUPUESTO 3: Crea la release y adjunta el .war
+      - name: Publicar Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: target/*.war

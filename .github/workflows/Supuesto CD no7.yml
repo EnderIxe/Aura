@@ -1,0 +1,16 @@
+name: CD 7 - Flujos Encadenados
+
+# SUPUESTO 7: Escucha a otro flujo
+on:
+  workflow_run:
+    workflows: ["Supuesto 3 - Java 21"] # Pon aquí el nombre EXACTO de uno de tus flujos CI que pasen en verde
+    types:
+      - completed
+
+jobs:
+  despliegue-condicionado:
+    # SUPUESTO 7: Solo se ejecuta si el flujo anterior terminó en "success"
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "El CI ha terminado correctamente. ¡Vía libre para desplegar!"

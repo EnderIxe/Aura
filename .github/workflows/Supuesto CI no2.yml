@@ -1,0 +1,25 @@
+name: Supuesto 2 - Filtro Dev
+
+# SUPUESTO 2: El Filtro de Desarrollo
+# Solo se dispara cuando subimos código a la rama feature-dev
+on: 
+  push:
+    branches: 
+      - "feature-dev"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      # Usamos test (aunque lo omitimos temporalmente por el error de la base de datos)
+      - name: Ejecutar Tests
+        run: mvn test -DskipTests

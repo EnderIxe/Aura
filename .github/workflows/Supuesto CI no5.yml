@@ -1,0 +1,23 @@
+name: Supuesto 5 - Memoria Inteligente
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      # SUPUESTO 5: Aquí configuramos Java y le decimos a GitHub que guarde la caché de Maven
+      - name: Set up JDK 21 y Caché
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+          cache: 'maven' 
+
+      # Compilamos de forma limpia y rápida gracias a la caché
+      - name: Compilar usando caché
+        run: mvn -B compile -DskipTests
