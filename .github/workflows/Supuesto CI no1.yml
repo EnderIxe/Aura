@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Supuesto 1 - Vigilante
 
 # SUPUESTO 1: CONFIGURACIÓN DEL DISPARADOR
 # Se activa en todas las ramas al no especificar "branches
