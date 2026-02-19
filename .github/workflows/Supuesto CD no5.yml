@@ -1,0 +1,11 @@
+name: CD Supuesto 5 - Notificador
+
+on: workflow_dispatch
+
+jobs:
+  notificar-exito:
+    runs-on: ubuntu-latest
+    steps:
+      # SUPUESTO 5: Imprimir mensaje con fecha y autor
+      - name: Mensaje de confirmacion
+        run: echo "Despliegue ejecutado el $(date) por el usuario ${{ github.actor }} con éxito."
