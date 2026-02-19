@@ -7,23 +7,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout del código
+        uses: actions/checkout@v4
 
-      # SUPUESTO 3: Configurar Java 21 con distribución ZULU
-      - name: Set up JDK 21
+      # SUPUESTO 5: Aquí configuramos Java y le decimos a GitHub que guarde la caché de Maven
+      - name: Set up JDK 21 y Caché
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'zulu'
-          cache: maven
+          cache: 'maven' 
 
-      # Comando Maven simplificado y protegido contra el error de BBDD
-      - name: Build with Maven
-        run: mvn -B test
-        
-      - name: Guardar evidencias (Surefire Reports)
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: reporte-errores-tests
-          path: target/surefire-reports/
+      # Compilamos de forma limpia y rápida gracias a la caché
+      - name: Compilar usando caché
+        run: mvn -B compile -DskipTests

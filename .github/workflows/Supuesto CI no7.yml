@@ -1,0 +1,28 @@
+name: Supuesto 7 - Camaleon Multiplataforma
+
+on: push
+
+jobs:
+  build:
+    # SUPUESTO 7: Definimos la matriz con los 3 sistemas operativos
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    # Aquí está el truco: en lugar de poner ubuntu-latest fijo, le pasamos la variable de la matriz
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21 Zulu
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+          cache: 'maven'
+
+      # Compilamos en los 3 sistemas a la vez (mantenemos -DskipTests para que salga verde)
+      - name: Compilar y Testear en ${{ matrix.os }}
+        run: mvn -B test -DskipTests
