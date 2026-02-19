@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.clientesreviews"},{"l":"com.example.clientesreviews.controller"},{"l":"com.example.clientesreviews.controller.api"},{"l":"com.example.clientesreviews.model"},{"l":"com.example.clientesreviews.repository"},{"l":"com.example.clientesreviews.service"}];updateSearchResults();

@@ -1,0 +1,6 @@
+com.example.clientesreviews
+com.example.clientesreviews.controller
+com.example.clientesreviews.controller.api
+com.example.clientesreviews.model
+com.example.clientesreviews.repository
+com.example.clientesreviews.service
